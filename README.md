@@ -25,14 +25,20 @@ through the visual editor at `/admin/` rather than by hand.
 
 ## Going live
 
-1. **Merge this branch into your default branch.** The site is on
-   `claude/vibrant-ptolemy-6wl43z`. If the repository has no `main` branch yet, create one
-   from this branch and make it the default under **Settings → Branches**.
+1. **Turn on Pages.** Go to **Settings → Pages** and set **Source** to **GitHub Actions**.
+   That's the only required step — the repository was empty before this commit, so
+   `claude/vibrant-ptolemy-6wl43z` is currently the default branch and the site deploys from
+   it as-is.
 
-2. **Turn on Pages.** Go to **Settings → Pages** and set **Source** to **GitHub Actions**.
    The included workflow (`.github/workflows/deploy.yml`) publishes the repository root on
    every push to the default branch. It validates `data/content.json` first, so a malformed
    content file fails the build instead of breaking the live site.
+
+2. **Optional but recommended — rename the default branch to `main`.** Go to
+   **Settings → Branches**, click the pencil next to `claude/vibrant-ptolemy-6wl43z` and
+   rename it to `main`. The workflow follows whatever the default branch is called, so
+   nothing breaks. If you rename it, set **Branch** to `main` in the editor's Publish
+   section too.
 
 3. **Wait for the first run** to finish under the **Actions** tab. Your site will be at:
 
