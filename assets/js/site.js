@@ -243,8 +243,7 @@
   var NAV_ITEMS = [
     { href: "index.html", label: "Home" },
     { href: "projects.html", label: "Work" },
-    { href: "about.html", label: "About" },
-    { href: "contact.html", label: "Contact" }
+    { href: "about.html", label: "About" }
   ];
 
   function currentPage() {
@@ -253,7 +252,12 @@
   }
 
   function keepPreview(href) {
-    return isPreview() ? href + (href.indexOf("?") === -1 ? "?" : "&") + "preview=1" : href;
+    if (!isPreview()) return href;
+    // Insert before any #fragment, so "about.html#contact" stays valid.
+    var hash = href.indexOf("#");
+    var base = hash === -1 ? href : href.slice(0, hash);
+    var frag = hash === -1 ? "" : href.slice(hash);
+    return base + (base.indexOf("?") === -1 ? "?" : "&") + "preview=1" + frag;
   }
 
   function renderHeader(data) {
@@ -514,7 +518,7 @@
         "<p>" + esc(contact.body || "") + "</p>" +
       "</div>" +
       '<div class="btn-row">' +
-        '<a class="btn btn--on-dark" href="' + keepPreview("contact.html") + '">Contact me ' + ICONS.arrow + "</a>" +
+        '<a class="btn btn--on-dark" href="' + keepPreview("about.html#contact") + '">Contact me ' + ICONS.arrow + "</a>" +
         (profile.resumeUrl
           ? '<a class="btn btn--outline-on-dark" href="' + esc(asset(profile.resumeUrl)) +
             '" target="_blank" rel="noopener noreferrer">' + ICONS.doc + " Résumé</a>"
@@ -523,9 +527,9 @@
     "</div></section>";
   }
 
-  /* ---------------------------------------------------------------------
-     Page: Home
-     --------------------------------------------------------------------- */
+  /* Number of projects shown on the homepage highlight row. */
+  var HIGHLIGHT_COUNT = 3;
+
   function renderHome(data) {
     var home = data.home || {};
     var profile = data.profile || {};
@@ -554,7 +558,7 @@
                   esc(home.ctaPrimaryLabel) + " " + ICONS.arrow + "</a>"
                 : "") +
               (home.ctaSecondaryLabel
-                ? '<a class="btn btn--outline-on-dark" href="' + esc(keepPreview(safeUrl(home.ctaSecondaryUrl) || "contact.html")) + '">' +
+                ? '<a class="btn btn--outline-on-dark" href="' + esc(keepPreview(safeUrl(home.ctaSecondaryUrl) || "about.html#contact")) + '">' +
                   esc(home.ctaSecondaryLabel) + "</a>"
                 : "") +
             "</div>" +
@@ -564,80 +568,37 @@
         "</div></div></section>";
     }
 
-    var statsMount = $("[data-stats]");
-    var stats = nonEmpty(home.stats).filter(function (s) { return s.value || s.label; });
-    if (statsMount) {
-      statsMount.innerHTML = stats.length
-        ? '<section class="stats-strip"><div class="container"><div class="stats-grid">' +
-          stats.map(function (s) {
-            return '<div class="stat"><div class="stat-value">' + esc(s.value) + "</div>" +
-              '<div class="stat-label">' + esc(s.label) + "</div></div>";
-          }).join("") +
-          "</div></div></section>"
-        : "";
-    }
-
     var featuredMount = $("[data-featured]");
     if (featuredMount) {
       var all = nonEmpty(data.projects);
-      var featured = all.filter(function (p) { return p.featured; });
-      if (!featured.length) featured = all.slice(0, 3);
-      featured = featured.slice(0, 6);
 
-      featuredMount.innerHTML = featured.length
+      /* Flagged projects come first; if fewer than three are flagged the row
+         is topped up from the top of the list so it never looks half-built. */
+      var picked = all.filter(function (p) { return p.featured; });
+      all.forEach(function (p) {
+        if (picked.length < HIGHLIGHT_COUNT && picked.indexOf(p) === -1) picked.push(p);
+      });
+      picked = picked.slice(0, HIGHLIGHT_COUNT);
+
+      var more = all.length > picked.length;
+
+      featuredMount.innerHTML = picked.length
         ? '<section class="section"><div class="container">' +
           '<div class="section-head">' +
-            '<span class="eyebrow">Selected work</span>' +
-            "<h2>Featured projects</h2>" +
-            "<p>A sample of recent engagements. Full project list available in the work archive.</p>" +
+            (home.featuredEyebrow ? '<span class="eyebrow">' + esc(home.featuredEyebrow) + "</span>" : "") +
+            "<h2>" + esc(home.featuredHeading || "Selected work") + "</h2>" +
+            (home.featuredIntro ? "<p>" + esc(home.featuredIntro) + "</p>" : "") +
           "</div>" +
-          '<div class="grid grid--3">' + featured.map(projectCard).join("") + "</div>" +
-          '<div style="margin-top:38px"><a class="btn btn--outline" href="' + keepPreview("projects.html") +
-            '">View all work ' + ICONS.arrow + "</a></div>" +
+          '<div class="grid grid--3">' + picked.map(projectCard).join("") + "</div>" +
+          (more
+            ? '<div style="margin-top:38px"><a class="btn btn--outline" href="' + keepPreview("projects.html") +
+              '">View all ' + all.length + " projects " + ICONS.arrow + "</a></div>"
+            : "") +
           "</div></section>"
-        : "";
-    }
-
-    var servicesMount = $("[data-services]");
-    if (servicesMount) {
-      var services = nonEmpty(home.services).filter(function (s) { return s.title || s.description; });
-      servicesMount.innerHTML = services.length
-        ? '<section class="section section--alt"><div class="container">' +
-          '<div class="section-head">' +
-            (home.servicesEyebrow ? '<span class="eyebrow">' + esc(home.servicesEyebrow) + "</span>" : "") +
-            "<h2>" + esc(home.servicesHeading || "What I do") + "</h2>" +
-            (home.servicesIntro ? "<p>" + esc(home.servicesIntro) + "</p>" : "") +
-          "</div>" +
-          '<div class="grid grid--3">' + services.map(function (s, i) {
-            return '<div class="service-card" data-reveal style="transition-delay:' + i * 70 + 'ms">' +
-              '<span class="service-num">' + String(i + 1).padStart(2, "0") + "</span>" +
-              "<h3>" + esc(s.title) + "</h3>" +
-              "<p>" + esc(s.description) + "</p></div>";
-          }).join("") + "</div>" +
-          "</div></section>"
-        : "";
-    }
-
-    var quotesMount = $("[data-testimonials]");
-    if (quotesMount) {
-      var quotes = nonEmpty(data.testimonials).filter(function (q) { return q.quote; });
-      quotesMount.innerHTML = quotes.length
-        ? '<section class="section"><div class="container">' +
-          '<div class="section-head section-head--center">' +
-            '<span class="eyebrow eyebrow--center">References</span>' +
-            "<h2>What colleagues say</h2>" +
-          "</div>" +
-          '<div class="grid ' + (quotes.length > 1 ? "grid--2" : "") + '"' +
-          // A lone quote reads better constrained than stretched full width.
-          (quotes.length === 1 ? ' style="max-width:820px;margin:0 auto"' : "") + ">" +
-          quotes.slice(0, 4).map(function (q, i) {
-            return '<div class="quote-card" data-reveal style="transition-delay:' + i * 70 + 'ms">' +
-              '<div class="quote-mark" aria-hidden="true">&ldquo;</div>' +
-              "<blockquote>" + esc(q.quote) + "</blockquote>" +
-              '<div class="quote-attr"><strong>' + esc(q.author || "") + "</strong>" +
-              (q.title ? "<span>" + esc(q.title) + "</span>" : "") + "</div></div>";
-          }).join("") + "</div></div></section>"
-        : "";
+        : '<section class="section"><div class="container">' +
+          '<div class="empty-state"><h3>No projects yet</h3>' +
+          '<p>Add your first project in the <a href="' + BASE + 'admin/">content editor</a>.</p></div>' +
+          "</div></section>";
     }
 
     var ctaMount = $("[data-cta]");
@@ -873,7 +834,7 @@
   }
 
   /* ---------------------------------------------------------------------
-     Page: About
+     Page: About (narrative + contact, rendered on one page)
      --------------------------------------------------------------------- */
   function renderAbout(data) {
     var mount = $("[data-about]");
@@ -886,132 +847,52 @@
     if (bannerMount) {
       bannerMount.innerHTML = pageBanner({
         eyebrow: about.eyebrow || "About",
-        heading: about.heading || "Background",
+        heading: about.heading || "About me",
         body: profile.summary,
         crumbs: [{ label: "Home", href: "index.html" }, { label: "About" }]
       });
     }
 
     var photo = asset(profile.photo);
-    var experience = nonEmpty(data.experience);
-    var education = nonEmpty(data.education);
-    var certifications = nonEmpty(data.certifications).filter(function (c) { return c.name; });
-    var skills = nonEmpty(data.skills).filter(function (s) { return nonEmpty(s.items).length; });
+    var facts = [];
+    if (profile.role) facts.push(["Role", esc(profile.role)]);
+    if (profile.location) facts.push(["Location", esc(profile.location)]);
+    if (profile.availability) facts.push(["Availability", esc(profile.availability)]);
+    if (profile.email) facts.push(["Email", '<a href="mailto:' + esc(profile.email) + '">' + esc(profile.email) + "</a>"]);
 
-    var html = "";
-
-    /* Narrative + portrait */
-    html += '<section class="section"><div class="container">' +
-      '<div class="grid" style="grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:60px;align-items:start">' +
+    mount.innerHTML = '<section class="section"><div class="container">' +
+      '<div class="about-grid">' +
         '<div class="prose">' + mdToHtml(about.body) + "</div>" +
         "<div>" +
           (photo
-            ? '<img src="' + esc(photo) + '" alt="' + esc(profile.name || "") +
-              '" style="width:100%;aspect-ratio:4/5;object-fit:cover;border:1px solid var(--c-line);border-radius:var(--r)">'
+            ? '<img class="about-portrait" src="' + esc(photo) + '" alt="' + esc(profile.name || "") + '">'
             : "") +
-          '<div style="margin-top:' + (photo ? "24px" : "0") + ';padding:24px;background:var(--c-surface-2);border:1px solid var(--c-line);border-top:3px solid var(--c-navy);border-radius:var(--r)">' +
-            '<dl style="margin:0">' +
-              (profile.role ? '<div class="fact"><dt>Role</dt><dd>' + esc(profile.role) + "</dd></div>" : "") +
-              (profile.location ? '<div class="fact"><dt>Location</dt><dd>' + esc(profile.location) + "</dd></div>" : "") +
-              (profile.availability ? '<div class="fact"><dt>Availability</dt><dd>' + esc(profile.availability) + "</dd></div>" : "") +
-              (profile.email ? '<div class="fact"><dt>Email</dt><dd><a href="mailto:' + esc(profile.email) + '">' + esc(profile.email) + "</a></dd></div>" : "") +
-            "</dl>" +
-            (profile.resumeUrl
-              ? '<a class="btn btn--primary btn--sm" style="margin-top:18px;width:100%" href="' +
-                esc(asset(profile.resumeUrl)) + '" target="_blank" rel="noopener noreferrer">' +
-                ICONS.doc + " Download résumé</a>"
-              : "") +
-          "</div>" +
+          (facts.length || profile.resumeUrl
+            ? '<div class="profile-card' + (photo ? " profile-card--stacked" : "") + '"><dl style="margin:0">' +
+              facts.map(function (f) {
+                return '<div class="fact"><dt>' + esc(f[0]) + "</dt><dd>" + f[1] + "</dd></div>";
+              }).join("") + "</dl>" +
+              (profile.resumeUrl
+                ? '<a class="btn btn--primary btn--sm profile-card__cta" href="' + esc(asset(profile.resumeUrl)) +
+                  '" target="_blank" rel="noopener noreferrer">' + ICONS.doc + " Download r\u00e9sum\u00e9</a>"
+                : "") +
+              "</div>"
+            : "") +
         "</div>" +
       "</div></div></section>";
 
-    if (experience.length) {
-      html += '<section class="section section--alt"><div class="container">' +
-        '<div class="section-head"><span class="eyebrow">Experience</span><h2>Professional history</h2></div>' +
-        '<div class="timeline">' + experience.map(function (job) {
-          var bullets = nonEmpty(job.bullets);
-          return '<article class="timeline-item" data-reveal>' +
-            '<div class="timeline-period">' + esc(periodLabel(job)) +
-              (job.current ? '<span class="current-pill">Current</span>' : "") +
-            "</div>" +
-            '<div class="timeline-body">' +
-              "<h3>" + esc(job.role || "") + "</h3>" +
-              '<div class="timeline-org">' + esc(job.organization || "") +
-                (job.location ? '<span class="loc"> — ' + esc(job.location) + "</span>" : "") +
-              "</div>" +
-              (job.summary ? "<p>" + esc(job.summary) + "</p>" : "") +
-              (bullets.length ? "<ul>" + bullets.map(function (b) { return "<li>" + esc(b) + "</li>"; }).join("") + "</ul>" : "") +
-            "</div></article>";
-        }).join("") + "</div></div></section>";
-    }
-
-    if (skills.length) {
-      html += '<section class="section"><div class="container">' +
-        '<div class="section-head"><span class="eyebrow">Capabilities</span><h2>Skills &amp; tools</h2></div>' +
-        skills.map(function (group) {
-          return '<div class="skill-group"><h3>' + esc(group.category || "General") + "</h3>" +
-            '<div class="tag-row">' + nonEmpty(group.items).map(function (item) {
-              return '<span class="tag">' + esc(item) + "</span>";
-            }).join("") + "</div></div>";
-        }).join("") +
-        "</div></section>";
-    }
-
-    if (education.length || certifications.length) {
-      html += '<section class="section section--alt"><div class="container">' +
-        '<div class="grid grid--2" style="gap:60px">' +
-        (education.length
-          ? "<div><div class=\"section-head\" style=\"margin-bottom:26px\"><span class=\"eyebrow\">Education</span><h2>Academic background</h2></div>" +
-            '<div class="record-list">' + education.map(function (ed) {
-              return '<div class="record"><div><h3>' + esc(ed.credential || "") + "</h3>" +
-                '<div class="sub">' + esc(ed.institution || "") +
-                (ed.location ? " — " + esc(ed.location) : "") + "</div>" +
-                (ed.detail ? '<div class="detail">' + esc(ed.detail) + "</div>" : "") +
-                '</div><div class="when">' + esc(ed.year || "") + "</div></div>";
-            }).join("") + "</div></div>"
-          : "") +
-        (certifications.length
-          ? "<div><div class=\"section-head\" style=\"margin-bottom:26px\"><span class=\"eyebrow\">Credentials</span><h2>Certifications</h2></div>" +
-            '<div class="record-list">' + certifications.map(function (cert) {
-              var url = safeUrl(cert.url);
-              var name = url
-                ? '<a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' + esc(cert.name) + " " + ICONS.external + "</a>"
-                : esc(cert.name);
-              return '<div class="record"><div><h3>' + name + "</h3>" +
-                '<div class="sub">' + esc(cert.issuer || "") + "</div></div>" +
-                '<div class="when">' + esc(cert.year || "") + "</div></div>";
-            }).join("") + "</div></div>"
-          : "") +
-        "</div></div></section>";
-    }
-
-    mount.innerHTML = html;
-
-    var ctaMount = $("[data-cta]");
-    if (ctaMount) ctaMount.innerHTML = ctaBand(data);
-
+    renderContactSection(data);
     renderMeta(data, { title: "About" });
   }
 
-  /* ---------------------------------------------------------------------
-     Page: Contact
-     --------------------------------------------------------------------- */
-  function renderContact(data) {
+  /* Contact block. Lives at the bottom of the About page, addressable as
+     about.html#contact. */
+  function renderContactSection(data) {
     var mount = $("[data-contact]");
     if (!mount) return;
 
     var contact = data.contact || {};
     var profile = data.profile || {};
-
-    var bannerMount = $("[data-banner]");
-    if (bannerMount) {
-      bannerMount.innerHTML = pageBanner({
-        eyebrow: contact.eyebrow || "Contact",
-        heading: contact.heading || "Get in touch",
-        body: contact.body,
-        crumbs: [{ label: "Home", href: "index.html" }, { label: "Contact" }]
-      });
-    }
 
     var methods = [];
     if (profile.email) {
@@ -1034,17 +915,15 @@
         "</a></dd></div></div>");
     });
 
-    mount.innerHTML = '<section class="section"><div class="container">' +
+    mount.innerHTML = '<section class="section section--alt" id="contact"><div class="container">' +
       '<div class="contact-grid">' +
         "<div>" +
           '<div class="section-head" style="margin-bottom:24px">' +
-            '<span class="eyebrow">Direct</span><h2>Contact details</h2>' +
+            (contact.eyebrow ? '<span class="eyebrow">' + esc(contact.eyebrow) + "</span>" : "") +
+            "<h2>" + esc(contact.heading || "Get in touch") + "</h2>" +
+            (contact.body ? "<p>" + esc(contact.body) + "</p>" : "") +
           "</div>" +
           '<dl class="contact-methods">' + methods.join("") + "</dl>" +
-          (profile.availability
-            ? '<p style="margin-top:24px;font-size:0.9375rem;color:var(--c-muted)">' +
-              "<strong style=\"color:var(--c-ink)\">Status:</strong> " + esc(profile.availability) + "</p>"
-            : "") +
         "</div>" +
         '<form class="form-card" data-contact-form novalidate>' +
           '<div class="section-head" style="margin-bottom:24px"><h2 style="font-size:1.35rem">Send a message</h2></div>' +
@@ -1065,7 +944,6 @@
       "</div></div></section>";
 
     wireContactForm(contact, profile);
-    renderMeta(data, { title: "Contact" });
   }
 
   function wireContactForm(contact, profile) {
@@ -1095,13 +973,13 @@
         var body = "Name: " + name + "\nEmail: " + email + "\n\n" + message;
         window.location.href = "mailto:" + encodeURIComponent(profile.email || "") +
           "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-        say("Opening your email client…", true);
+        say("Opening your email client\u2026", true);
         return;
       }
 
       submit.disabled = true;
       var original = submit.innerHTML;
-      submit.textContent = "Sending…";
+      submit.textContent = "Sending\u2026";
 
       fetch(endpoint, {
         method: "POST",
@@ -1127,8 +1005,7 @@
     home: renderHome,
     projects: renderProjects,
     project: renderProjectDetail,
-    about: renderAbout,
-    contact: renderContact
+    about: renderAbout
   };
 
   function boot() {

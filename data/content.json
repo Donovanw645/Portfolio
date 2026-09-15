@@ -1,9 +1,9 @@
 {
   "site": {
     "title": "Donovan White",
-    "shortTitle": "D. White",
-    "tagline": "Portfolio",
-    "description": "Selected work, professional experience, and capabilities.",
+    "shortTitle": "Donovan White",
+    "tagline": "Project Portfolio",
+    "description": "A portfolio of selected projects and case studies.",
     "copyright": "Donovan White",
     "showAdminLink": true
   },
@@ -16,43 +16,23 @@
     "availability": "Open to new opportunities",
     "photo": "",
     "resumeUrl": "",
-    "summary": "Replace this summary in the editor. Use two or three sentences to describe what you do, the kind of problems you solve, and the results you deliver. Keep it specific and measurable where you can."
+    "summary": "Replace this summary in the editor. Two or three sentences on the kind of projects you build and the results they produce."
   },
   "social": [
     { "label": "LinkedIn", "url": "https://www.linkedin.com/" },
     { "label": "GitHub", "url": "https://github.com/Donovanw645" }
   ],
   "home": {
-    "eyebrow": "Portfolio",
-    "heroHeading": "Building practical solutions with measurable results.",
-    "heroSubheading": "A selection of professional work, case studies, and capabilities. Everything on this site is editable from the built-in editor.",
-    "ctaPrimaryLabel": "View work",
+    "eyebrow": "Project Portfolio",
+    "heroHeading": "Selected projects, built end to end.",
+    "heroSubheading": "A record of what I have designed, built and shipped. Every project here includes the context, the approach and the outcome.",
+    "ctaPrimaryLabel": "View all projects",
     "ctaPrimaryUrl": "projects.html",
     "ctaSecondaryLabel": "Get in touch",
-    "ctaSecondaryUrl": "contact.html",
-    "stats": [
-      { "value": "5+", "label": "Years of experience" },
-      { "value": "20", "label": "Projects delivered" },
-      { "value": "12", "label": "Clients served" },
-      { "value": "100%", "label": "On-time delivery" }
-    ],
-    "servicesEyebrow": "Capabilities",
-    "servicesHeading": "What I do",
-    "servicesIntro": "Core areas of focus and the kind of engagements I take on.",
-    "services": [
-      {
-        "title": "Discovery & Strategy",
-        "description": "Clarify the problem, map constraints, and define a scope that can actually ship. Deliverables include requirements, success metrics, and a phased plan."
-      },
-      {
-        "title": "Design & Implementation",
-        "description": "Turn the plan into working output. Structured delivery with clear checkpoints, documented decisions, and no surprises at handoff."
-      },
-      {
-        "title": "Review & Optimization",
-        "description": "Audit what exists, identify what is underperforming, and prioritize fixes by impact against effort. Findings delivered as an actionable report."
-      }
-    ]
+    "ctaSecondaryUrl": "about.html#contact",
+    "featuredEyebrow": "Highlights",
+    "featuredHeading": "Selected work",
+    "featuredIntro": "Three projects that best represent the kind of work I take on."
   },
   "projects": [
     {
@@ -80,7 +60,7 @@
     {
       "id": "second-sample",
       "title": "Second Sample Project",
-      "summary": "Another placeholder entry so you can see how the grid and filters behave with multiple items.",
+      "summary": "Another placeholder entry so you can see how the highlight row and the archive filters behave.",
       "client": "Internal",
       "role": "Lead",
       "year": "2024",
@@ -92,78 +72,28 @@
       "highlights": [],
       "description": "Add your case study here using the editor.",
       "links": []
-    }
-  ],
-  "experience": [
-    {
-      "role": "Your Job Title",
-      "organization": "Company Name",
-      "location": "City, State",
-      "start": "2023",
-      "end": "",
-      "current": true,
-      "summary": "One sentence on the scope of the role.",
-      "bullets": [
-        "Describe a responsibility and the result it produced",
-        "Lead with the outcome, then the action",
-        "Use numbers wherever you have them"
-      ]
     },
     {
-      "role": "Previous Job Title",
-      "organization": "Previous Company",
-      "location": "City, State",
-      "start": "2021",
-      "end": "2023",
-      "current": false,
-      "summary": "",
-      "bullets": [
-        "A prior accomplishment worth highlighting"
-      ]
-    }
-  ],
-  "education": [
-    {
-      "credential": "Degree or Program",
-      "institution": "Institution Name",
-      "location": "City, State",
-      "year": "2021",
-      "detail": "Honors, concentration, or relevant coursework."
-    }
-  ],
-  "certifications": [
-    {
-      "name": "Certification Name",
-      "issuer": "Issuing Organization",
+      "id": "third-sample",
+      "title": "Third Sample Project",
+      "summary": "The third highlight slot. Untick \"Feature this project\" on any entry to swap which three appear on the homepage.",
+      "client": "Personal",
+      "role": "Designer and developer",
       "year": "2024",
-      "url": ""
-    }
-  ],
-  "skills": [
-    {
-      "category": "Core",
-      "items": ["Project Management", "Stakeholder Communication", "Process Design"]
-    },
-    {
-      "category": "Technical",
-      "items": ["Excel", "SQL", "Data Analysis", "Reporting"]
-    },
-    {
-      "category": "Tools",
-      "items": ["Jira", "Notion", "Power BI"]
-    }
-  ],
-  "testimonials": [
-    {
-      "quote": "Replace this with a real quote from a manager, client, or colleague. Short, specific praise is far more convincing than long general praise.",
-      "author": "Name of Referrer",
-      "title": "Title, Company"
+      "status": "Completed",
+      "featured": true,
+      "tags": ["Design", "Implementation"],
+      "cover": "",
+      "gallery": [],
+      "highlights": [],
+      "description": "Add your case study here using the editor.",
+      "links": []
     }
   ],
   "about": {
     "eyebrow": "About",
-    "heading": "Background",
-    "body": "Write a fuller professional narrative here. Two to four paragraphs works well.\n\nCover how you got into this field, what you focus on now, and what kind of work you are looking for next. Basic formatting such as **bold**, *italic*, bullet lists, and [links](https://example.com) is supported."
+    "heading": "About me",
+    "body": "Write a short professional narrative here. Two or three paragraphs works well for a project portfolio.\n\nCover what you build, the tools and methods you favour, and what kind of work you are looking for next. Basic formatting such as **bold**, *italic*, bullet lists, and [links](https://example.com) is supported."
   },
   "contact": {
     "eyebrow": "Contact",

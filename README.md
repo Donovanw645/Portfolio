@@ -1,10 +1,18 @@
 # Portfolio
 
-A professional portfolio site for GitHub Pages, with a built-in content editor.
+A project portfolio for GitHub Pages, with a built-in content editor.
 
 Static HTML, CSS and vanilla JavaScript — no build step, no framework, no dependencies to
 install. Every page renders from a single data file, `data/content.json`, which you edit
 through the visual editor at `/admin/` rather than by hand.
+
+Three pages:
+
+| Page | What's on it |
+|---|---|
+| **Home** | A short intro, then three highlight projects, then a closing call to action. |
+| **Work** | Every project, filterable by tag. Each one links to its own case study page. |
+| **About** | Your write-up, with contact details and a message form below it at `#contact`. |
 
 ---
 
@@ -67,9 +75,15 @@ saved to a **local draft** in your browser as you go — nothing is public until
 | **Preview** | Opens the real site rendered from your draft, with an orange banner so you can tell it apart from the live version. |
 | **Publish** | Commits your changes to the repository. |
 
-**Reordering and editing entries.** Lists (projects, jobs, skills…) use collapsible rows.
-Click a row to expand it; use the arrows to reorder, the copy icon to duplicate, and the bin
-to delete. Order in the editor is the order on the site, so put your strongest work first.
+**Reordering and editing entries.** The project list uses collapsible rows. Click a row to
+expand it; use the arrows to reorder, the copy icon to duplicate, and the bin to delete.
+Order in the editor is the order on the site, so put your strongest work first.
+
+**Choosing the three highlights.** The homepage shows the first three projects with
+**Feature this project** ticked. Tick a fourth and it is ignored until you untick one of the
+others — reorder the list to control which three win. If fewer than three are ticked, the row
+is topped up from the top of the list so it never looks half-built. Every project appears on
+the Work page regardless.
 
 **Images.** Use *Choose file* to upload, or paste a URL. Large photos are downscaled in the
 browser (longest edge capped at 1800px) before being stored, so your repository doesn't fill
@@ -151,11 +165,10 @@ Any static server works (`npx serve`, `php -S localhost:8000`, etc.).
 
 ```
 .
-├── index.html              Home
+├── index.html              Home — intro plus three highlight projects
 ├── projects.html           Work archive, with tag filters
 ├── project.html            Case study detail (?id=slug)
-├── about.html              Background, experience, skills, education
-├── contact.html            Contact details and message form
+├── about.html              About narrative plus the contact block (#contact)
 ├── 404.html                Self-contained not-found page
 ├── admin/
 │   └── index.html          Content editor
@@ -186,15 +199,10 @@ need to touch the file directly.
 | `site` | Titles, meta description, footer copyright |
 | `profile` | Name, role, contact details, portrait, résumé link |
 | `social` | Labelled external links |
-| `home` | Hero copy, key figures, capability blocks |
+| `home` | Intro copy and the wording above the highlight row |
 | `projects` | Case studies — each becomes its own page |
-| `experience` | Work history timeline |
-| `education` | Degrees and programmes |
-| `certifications` | Credentials, with optional verification links |
-| `skills` | Skill groups by category |
-| `testimonials` | Quotes shown on the homepage |
 | `about` | About page narrative |
-| `contact` | Contact copy and form endpoint |
+| `contact` | Contact copy and form endpoint (renders on the About page) |
 
 A project entry looks like this:
 
@@ -251,6 +259,10 @@ ones under `:root[data-theme="dark"]`.
 **Change the favicon and brand mark.** `assets/img/favicon.svg` holds the initials; the header
 and footer marks are generated from the profile name automatically.
 
+**Change how many projects the homepage highlights.** Set `HIGHLIGHT_COUNT` near the top of
+the rendering section in `assets/js/site.js`. It's 3. The grid is built for three across, so
+6 also lays out cleanly; 4 or 5 will leave a gap on the last row.
+
 **Add a navigation item.** Add the page, then add an entry to `NAV_ITEMS` near the top of
 `assets/js/site.js`.
 
@@ -260,7 +272,7 @@ appears automatically. Then render it wherever you want in `assets/js/site.js`.
 
 **Enable the contact form.** GitHub Pages serves static files only and cannot process form
 submissions. Create a free endpoint at [Formspree](https://formspree.io) or
-[Getform](https://getform.io) and paste it into **Contact page → Form endpoint URL**. Without
+[Getform](https://getform.io) and paste it into **Contact → Form endpoint URL**. Without
 one, the form falls back to opening the visitor's email client.
 
 ---

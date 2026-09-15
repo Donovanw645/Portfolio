@@ -615,42 +615,7 @@ blockquote {
 .breadcrumb .sep { opacity: 0.5; }
 
 /* --------------------------------------------------------------------------
-   8. Stats strip
-   -------------------------------------------------------------------------- */
-.stats-strip {
-  background: var(--c-surface);
-  border-bottom: 1px solid var(--c-line);
-}
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-}
-.stat {
-  padding: 36px 30px;
-  border-left: 1px solid var(--c-line-soft);
-  text-align: center;
-}
-.stat:first-child { border-left: 0; }
-.stat-value {
-  font-family: var(--font-serif);
-  font-size: 2.35rem;
-  font-weight: 600;
-  line-height: 1.05;
-  color: var(--c-navy);
-  letter-spacing: -0.02em;
-}
-:root[data-theme="dark"] .stat-value { color: var(--c-primary-lt); }
-.stat-label {
-  margin-top: 8px;
-  font-size: 0.78125rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--c-muted);
-}
-
-/* --------------------------------------------------------------------------
-   9. Cards
+   8. Cards
    -------------------------------------------------------------------------- */
 .card {
   display: flex;
@@ -796,141 +761,7 @@ a.card:hover, .card--link:hover {
 .filter-count { margin-left: auto; font-size: 0.875rem; color: var(--c-muted); }
 
 /* --------------------------------------------------------------------------
-   10. Timeline (experience)
-   -------------------------------------------------------------------------- */
-.timeline { position: relative; }
-.timeline-item {
-  position: relative;
-  display: grid;
-  grid-template-columns: 190px minmax(0, 1fr);
-  gap: 36px;
-  padding: 32px 0;
-  border-top: 1px solid var(--c-line);
-}
-.timeline-item:first-child { border-top: 0; padding-top: 0; }
-.timeline-period {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--c-muted);
-  padding-top: 3px;
-}
-.timeline-period .current-pill {
-  display: inline-block;
-  margin-top: 9px;
-  padding: 3px 9px;
-  background: var(--c-primary-pale);
-  border-radius: var(--r);
-  font-size: 0.6875rem;
-  letter-spacing: 0.08em;
-  color: var(--c-primary-dk);
-}
-:root[data-theme="dark"] .timeline-period .current-pill { color: var(--c-primary-lt); }
-.timeline-body h3 { margin-bottom: 4px; }
-.timeline-org {
-  margin-bottom: 14px;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--c-primary);
-}
-.timeline-org .loc { font-weight: 400; color: var(--c-muted); }
-.timeline-body ul { margin: 12px 0 0; padding-left: 0; list-style: none; }
-.timeline-body ul li {
-  position: relative;
-  padding-left: 20px;
-  margin-bottom: 8px;
-  font-size: 0.9375rem;
-}
-.timeline-body ul li::before {
-  content: "";
-  position: absolute;
-  left: 0; top: 0.62em;
-  width: 7px; height: 1px;
-  background: var(--c-primary);
-}
-
-/* --------------------------------------------------------------------------
-   11. Definition rows (education / certifications)
-   -------------------------------------------------------------------------- */
-.record-list { border-top: 1px solid var(--c-line); }
-.record {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 16px 28px;
-  align-items: baseline;
-  padding: 22px 0;
-  border-bottom: 1px solid var(--c-line);
-}
-.record h3 { margin-bottom: 4px; font-size: 1.0625rem; }
-.record .sub { font-size: 0.9375rem; color: var(--c-primary); font-weight: 500; }
-.record .detail { margin-top: 7px; font-size: 0.9375rem; color: var(--c-muted); }
-.record .when {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--c-muted);
-  white-space: nowrap;
-}
-
-/* --------------------------------------------------------------------------
-   12. Skills
-   -------------------------------------------------------------------------- */
-.skill-group {
-  padding: 26px 0;
-  border-top: 1px solid var(--c-line);
-  display: grid;
-  grid-template-columns: 200px minmax(0, 1fr);
-  gap: 28px;
-}
-.skill-group:first-child { border-top: 0; }
-.skill-group h3 {
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--c-muted);
-  margin: 4px 0 0;
-}
-
-/* --------------------------------------------------------------------------
-   13. Testimonials
-   -------------------------------------------------------------------------- */
-.quote-card {
-  padding: 36px 34px;
-  background: var(--c-surface);
-  border: 1px solid var(--c-line);
-  border-left: 3px solid var(--c-primary);
-  border-radius: var(--r);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.quote-mark {
-  font-family: var(--font-serif);
-  font-size: 3rem;
-  line-height: 0.6;
-  color: var(--c-line-strong);
-  margin-bottom: 16px;
-}
-.quote-card blockquote {
-  margin: 0 0 22px;
-  padding: 0;
-  border: 0;
-  font-family: var(--font-serif);
-  font-size: 1.0625rem;
-  font-style: normal;
-  line-height: 1.66;
-  color: var(--c-ink);
-  flex: 1;
-}
-.quote-attr { padding-top: 18px; border-top: 1px solid var(--c-line-soft); }
-.quote-attr strong { display: block; color: var(--c-ink); font-size: 0.9375rem; }
-.quote-attr span { font-size: 0.875rem; color: var(--c-muted); }
-
-/* --------------------------------------------------------------------------
-   14. Prose (rendered markdown-lite)
+   9. Prose (rendered markdown-lite)
    -------------------------------------------------------------------------- */
 .prose { font-size: 1.0625rem; line-height: 1.75; color: var(--c-body); }
 .prose h2 { font-size: 1.5rem; margin-top: 2em; margin-bottom: 0.6em; }
@@ -942,7 +773,7 @@ a.card:hover, .card--link:hover {
 .prose img { margin: 1.8em 0; border: 1px solid var(--c-line); border-radius: var(--r); }
 
 /* --------------------------------------------------------------------------
-   15. Project detail
+   10. Project detail
    -------------------------------------------------------------------------- */
 .detail-grid {
   display: grid;
@@ -1043,7 +874,41 @@ a.card:hover, .card--link:hover {
 .pager-link--next { text-align: right; margin-left: auto; }
 
 /* --------------------------------------------------------------------------
-   16. Contact
+   11. About page
+   -------------------------------------------------------------------------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 60px;
+  align-items: start;
+}
+.about-portrait {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r);
+}
+.profile-card {
+  padding: 24px;
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-line);
+  border-top: 3px solid var(--c-navy);
+  border-radius: var(--r);
+}
+.profile-card--stacked { margin-top: 24px; }
+.profile-card__cta { margin-top: 18px; width: 100%; }
+
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .about-portrait { max-width: 280px; }
+}
+
+/* Offset the sticky header when jumping to about.html#contact. */
+#contact { scroll-margin-top: 92px; }
+
+/* --------------------------------------------------------------------------
+   12. Contact
    -------------------------------------------------------------------------- */
 .contact-grid {
   display: grid;
@@ -1127,7 +992,7 @@ a.card:hover, .card--link:hover {
 :root[data-theme="dark"] .form-status--err { background: #2d1717; border-color: #552828; }
 
 /* --------------------------------------------------------------------------
-   17. CTA band
+   13. CTA band
    -------------------------------------------------------------------------- */
 .cta-band {
   background: var(--c-navy);
@@ -1146,7 +1011,7 @@ a.card:hover, .card--link:hover {
 }
 
 /* --------------------------------------------------------------------------
-   18. Footer
+   14. Footer
    -------------------------------------------------------------------------- */
 .site-footer {
   background: var(--c-navy-dark);
@@ -1197,7 +1062,7 @@ a.card:hover, .card--link:hover {
 .footer-bottom a { color: rgba(255, 255, 255, 0.6); }
 
 /* --------------------------------------------------------------------------
-   19. Utility states
+   15. Utility states
    -------------------------------------------------------------------------- */
 .empty-state {
   padding: 66px 30px;
@@ -1247,7 +1112,7 @@ a.card:hover, .card--link:hover {
 .preview-banner a { color: #fff; text-decoration: underline; }
 
 /* --------------------------------------------------------------------------
-   20. Responsive
+   16. Responsive
    -------------------------------------------------------------------------- */
 @media (max-width: 1040px) {
   .detail-grid { grid-template-columns: minmax(0, 1fr); gap: 42px; }
@@ -1262,8 +1127,6 @@ a.card:hover, .card--link:hover {
   .grid--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .contact-grid { grid-template-columns: minmax(0, 1fr); gap: 44px; }
   .footer-main { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; padding: 48px 0 36px; }
-  .timeline-item { grid-template-columns: minmax(0, 1fr); gap: 10px; }
-  .skill-group { grid-template-columns: minmax(0, 1fr); gap: 14px; }
   .cta-inner { gap: 26px; }
 }
 
@@ -1272,10 +1135,6 @@ a.card:hover, .card--link:hover {
   body { font-size: 15.5px; }
   .grid--2, .grid--3, .grid--4 { grid-template-columns: minmax(0, 1fr); }
   .footer-main { grid-template-columns: minmax(0, 1fr); }
-  .stat { border-left: 0; border-top: 1px solid var(--c-line-soft); padding: 26px 20px; }
-  .stat:first-child { border-top: 0; }
-  .record { grid-template-columns: minmax(0, 1fr); gap: 6px; }
-  .record .when { grid-row: 1; }
   .btn { width: 100%; }
   .btn-row { flex-direction: column; align-items: stretch; }
   .filter-count { width: 100%; margin-left: 0; }
@@ -1286,7 +1145,7 @@ a.card:hover, .card--link:hover {
 }
 
 /* --------------------------------------------------------------------------
-   21. Print
+   17. Print
    -------------------------------------------------------------------------- */
 @media print {
   .site-header, .utility-bar, .site-footer, .cta-band, .nav-toggle,

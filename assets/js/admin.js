@@ -110,7 +110,7 @@
       desc: "Global titles and metadata used in the browser tab, header and footer.",
       fields: [
         { key: "title", label: "Site title", type: "text", hint: "Usually your full name." },
-        { key: "shortTitle", label: "Header brand text", type: "text", hint: "Shorter version shown in the navigation bar." },
+        { key: "shortTitle", label: "Header brand text", type: "text", hint: "Shown in the navigation bar. Use your full name, or a shorter form if it crowds the nav." },
         { key: "tagline", label: "Brand sub-label", type: "text", hint: "Small uppercase text under the brand, e.g. \"Portfolio\"." },
         { key: "description", label: "Meta description", type: "textarea", full: true, hint: "Used for search engines and link previews. Aim for 150-160 characters." },
         { key: "copyright", label: "Copyright name", type: "text" },
@@ -148,7 +148,7 @@
     {
       key: "home", label: "Homepage", type: "object",
       title: "Homepage",
-      desc: "The hero banner, key figures and capability blocks on the landing page.",
+      desc: "The intro banner and the wording above the three highlighted projects.",
       fields: [
         { key: "eyebrow", label: "Hero eyebrow", type: "text", hint: "Small label above the headline." },
         { key: "heroHeading", label: "Hero headline", type: "textarea", full: true },
@@ -157,32 +157,15 @@
         { key: "ctaPrimaryUrl", label: "Primary button link", type: "text", hint: "e.g. projects.html or a full URL." },
         { key: "ctaSecondaryLabel", label: "Secondary button text", type: "text" },
         { key: "ctaSecondaryUrl", label: "Secondary button link", type: "text" },
-        {
-          key: "stats", label: "Key figures", type: "list", full: true,
-          hint: "The band of numbers under the hero. Leave empty to hide the band.",
-          itemName: "figure", titleKey: "label", template: { value: "", label: "" },
-          fields: [
-            { key: "value", label: "Figure", type: "text", hint: "e.g. 5+, 20, 100%" },
-            { key: "label", label: "Caption", type: "text" }
-          ]
-        },
-        { key: "servicesEyebrow", label: "Capabilities eyebrow", type: "text" },
-        { key: "servicesHeading", label: "Capabilities heading", type: "text" },
-        { key: "servicesIntro", label: "Capabilities intro", type: "textarea", full: true },
-        {
-          key: "services", label: "Capability blocks", type: "list", full: true,
-          itemName: "capability", titleKey: "title", template: { title: "", description: "" },
-          fields: [
-            { key: "title", label: "Title", type: "text", full: true },
-            { key: "description", label: "Description", type: "textarea", full: true }
-          ]
-        }
+        { key: "featuredEyebrow", label: "Highlights eyebrow", type: "text", hint: "Small label above the highlight row." },
+        { key: "featuredHeading", label: "Highlights heading", type: "text" },
+        { key: "featuredIntro", label: "Highlights intro", type: "textarea", full: true },
       ]
     },
     {
       key: "projects", label: "Projects", type: "list",
       title: "Projects & case studies",
-      desc: "Each project gets its own page. Order here is the order shown on the site, so put your strongest work first.",
+      desc: "Each project gets its own page. Order here is the order shown on the site. The first three with \u201cFeature this project\u201d ticked appear on the homepage; the rest live on the Work page.",
       itemName: "project",
       titleKey: "title",
       subKey: "client",
@@ -199,7 +182,7 @@
         { key: "role", label: "Your role", type: "text" },
         { key: "year", label: "Year", type: "text" },
         { key: "status", label: "Status", type: "text", hint: "e.g. Completed, Ongoing, Prototype." },
-        { key: "featured", label: "Feature this project on the homepage", type: "checkbox", full: true },
+        { key: "featured", label: "Feature this project on the homepage (first three win)", type: "checkbox", full: true },
         { key: "tags", label: "Tags", type: "strings", full: true, inline: true, hint: "Comma separated. These become the filter buttons on the work page." },
         { key: "cover", label: "Cover image", type: "image", full: true },
         { key: "description", label: "Full write-up", type: "markdown", full: true },
@@ -216,84 +199,9 @@
       ]
     },
     {
-      key: "experience", label: "Experience", type: "list",
-      title: "Professional experience",
-      desc: "Your work history, shown as a timeline on the about page. Most recent first.",
-      itemName: "role",
-      titleKey: "role",
-      subKey: "organization",
-      template: { role: "", organization: "", location: "", start: "", end: "", current: false, summary: "", bullets: [] },
-      fields: [
-        { key: "role", label: "Job title", type: "text" },
-        { key: "organization", label: "Organisation", type: "text" },
-        { key: "location", label: "Location", type: "text" },
-        { key: "start", label: "Start", type: "text", hint: "e.g. 2023 or Mar 2023." },
-        { key: "end", label: "End", type: "text", hint: "Leave blank if this is your current role." },
-        { key: "current", label: "This is my current role", type: "checkbox", full: true },
-        { key: "summary", label: "Role summary", type: "textarea", full: true },
-        { key: "bullets", label: "Accomplishments", type: "strings", full: true, hint: "One per line. Lead with the outcome." }
-      ]
-    },
-    {
-      key: "education", label: "Education", type: "list",
-      title: "Education",
-      desc: "Degrees, diplomas and programmes.",
-      itemName: "entry",
-      titleKey: "credential",
-      subKey: "institution",
-      template: { credential: "", institution: "", location: "", year: "", detail: "" },
-      fields: [
-        { key: "credential", label: "Degree or programme", type: "text" },
-        { key: "institution", label: "Institution", type: "text" },
-        { key: "location", label: "Location", type: "text" },
-        { key: "year", label: "Year", type: "text" },
-        { key: "detail", label: "Detail", type: "textarea", full: true, hint: "Honours, concentration or relevant coursework." }
-      ]
-    },
-    {
-      key: "certifications", label: "Certifications", type: "list",
-      title: "Certifications & credentials",
-      desc: "Professional certifications, licences and courses.",
-      itemName: "certification",
-      titleKey: "name",
-      subKey: "issuer",
-      template: { name: "", issuer: "", year: "", url: "" },
-      fields: [
-        { key: "name", label: "Name", type: "text" },
-        { key: "issuer", label: "Issuing organisation", type: "text" },
-        { key: "year", label: "Year", type: "text" },
-        { key: "url", label: "Verification link", type: "url", hint: "Optional." }
-      ]
-    },
-    {
-      key: "skills", label: "Skills", type: "list",
-      title: "Skills & tools",
-      desc: "Grouped by category. Each group becomes a row on the about page.",
-      itemName: "group",
-      titleKey: "category",
-      template: { category: "", items: [] },
-      fields: [
-        { key: "category", label: "Category", type: "text", full: true, hint: "e.g. Core, Technical, Tools." },
-        { key: "items", label: "Skills", type: "strings", full: true, inline: true, hint: "Comma separated." }
-      ]
-    },
-    {
-      key: "testimonials", label: "References", type: "list",
-      title: "References & testimonials",
-      desc: "Quotes from managers, clients or colleagues. Shown on the homepage.",
-      itemName: "quote",
-      titleKey: "author",
-      template: { quote: "", author: "", title: "" },
-      fields: [
-        { key: "quote", label: "Quote", type: "textarea", full: true },
-        { key: "author", label: "Name", type: "text" },
-        { key: "title", label: "Title & company", type: "text" }
-      ]
-    },
-    {
-      key: "about", label: "About page", type: "object",
+      key: "about", label: "About", type: "object",
       title: "About page",
-      desc: "The narrative section at the top of the about page.",
+      desc: "The narrative at the top of the About page. Contact details sit below it on the same page.",
       fields: [
         { key: "eyebrow", label: "Eyebrow", type: "text" },
         { key: "heading", label: "Heading", type: "text" },
@@ -301,9 +209,9 @@
       ]
     },
     {
-      key: "contact", label: "Contact page", type: "object",
-      title: "Contact page",
-      desc: "Contact copy and the message form. Contact details themselves come from the Profile section.",
+      key: "contact", label: "Contact", type: "object",
+      title: "Contact block",
+      desc: "The contact section at the bottom of the About page, linked as about.html#contact. The details themselves come from Profile and Links.",
       fields: [
         { key: "eyebrow", label: "Eyebrow", type: "text" },
         { key: "heading", label: "Heading", type: "text" },
@@ -690,7 +598,7 @@
 
       '<div class="stat-tiles">' +
         '<div class="stat-tile"><div class="n">' + (state.data.projects || []).length + '</div><div class="l">Projects</div></div>' +
-        '<div class="stat-tile"><div class="n">' + (state.data.experience || []).length + '</div><div class="l">Roles</div></div>' +
+        '<div class="stat-tile"><div class="n">' + (state.data.projects || []).filter(function (p) { return p.featured; }).length + '</div><div class="l">Featured</div></div>' +
         '<div class="stat-tile"><div class="n">' + countPending() + '</div><div class="l">Files to upload</div></div>' +
         '<div class="stat-tile"><div class="n">' + bytes(size) + '</div><div class="l">Draft size</div></div>' +
       "</div>" +
@@ -1016,9 +924,15 @@
     toast("content.json downloaded. Commit it to data/content.json.", "ok");
   }
 
+  var PREVIEW_TARGET = {
+    projects: "../projects.html?preview=1",
+    about: "../about.html?preview=1",
+    contact: "../about.html?preview=1#contact"
+  };
+
   function openPreview() {
     saveDraft();
-    window.open("../index.html?preview=1", "_blank", "noopener");
+    window.open(PREVIEW_TARGET[state.section] || "../index.html?preview=1", "_blank", "noopener");
   }
 
   function revertDraft() {
@@ -1288,14 +1202,6 @@
         if (!Array.isArray(project[key])) project[key] = [];
       });
     });
-    (data.experience || []).forEach(function (job) {
-      if (!Array.isArray(job.bullets)) job.bullets = [];
-    });
-    (data.skills || []).forEach(function (group) {
-      if (!Array.isArray(group.items)) group.items = [];
-    });
-    if (!Array.isArray(data.home.stats)) data.home.stats = [];
-    if (!Array.isArray(data.home.services)) data.home.services = [];
     return data;
   }
 
