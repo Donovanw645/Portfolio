@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Content editor · Portfolio</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<link rel="stylesheet" href="../assets/css/main.css">
+<link rel="stylesheet" href="../assets/css/admin.css">
+<script>
+(function () {
+  try {
+    var saved = localStorage.getItem("portfolio:theme");
+    var mode = (saved === "light" || saved === "dark") ? saved
+      : (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", mode);
+  } catch (e) {}
+})();
+</script>
+<script src="../assets/js/admin.js" defer></script>
+</head>
+<body class="admin">
+
+<div class="admin-bar">
+  <div class="admin-bar-inner">
+    <a class="admin-brand" href="../index.html">
+      <span class="brand-mark" aria-hidden="true" data-admin-initials>DW</span>
+      <span>Content editor<small>Portfolio</small></span>
+    </a>
+
+    <div class="admin-bar-actions">
+      <span class="save-state" data-save-state><span class="dot"></span><span>Loading…</span></span>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle theme"
+              style="border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.8)"></button>
+      <button class="btn btn--outline btn--sm" type="button" data-action="save"
+              style="border-color:rgba(255,255,255,.28);color:#fff">Save draft</button>
+      <button class="btn btn--outline btn--sm" type="button" data-action="top-preview"
+              style="border-color:rgba(255,255,255,.28);color:#fff">Preview</button>
+      <button class="btn btn--on-dark btn--sm" type="button" data-action="top-publish">Publish</button>
+    </div>
+  </div>
+</div>
+
+<div class="admin-shell">
+  <nav class="admin-nav" data-admin-nav aria-label="Editor sections"></nav>
+  <div class="admin-main" data-admin-main></div>
+</div>
+
+<div class="toast-stack"></div>
+
+<noscript>
+  <div style="max-width:700px;margin:60px auto;padding:0 24px">
+    <div class="empty-state">
+      <h3>JavaScript is required</h3>
+      <p>The content editor runs entirely in your browser and needs JavaScript enabled.</p>
+    </div>
+  </div>
+</noscript>
+
+</body>
+</html>

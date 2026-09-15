@@ -1,0 +1,175 @@
+{
+  "site": {
+    "title": "Donovan White",
+    "shortTitle": "D. White",
+    "tagline": "Portfolio",
+    "description": "Selected work, professional experience, and capabilities.",
+    "copyright": "Donovan White",
+    "showAdminLink": true
+  },
+  "profile": {
+    "name": "Donovan White",
+    "role": "Your Professional Title",
+    "location": "City, State",
+    "email": "donovanwhite645@gmail.com",
+    "phone": "",
+    "availability": "Open to new opportunities",
+    "photo": "",
+    "resumeUrl": "",
+    "summary": "Replace this summary in the editor. Use two or three sentences to describe what you do, the kind of problems you solve, and the results you deliver. Keep it specific and measurable where you can."
+  },
+  "social": [
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/" },
+    { "label": "GitHub", "url": "https://github.com/Donovanw645" }
+  ],
+  "home": {
+    "eyebrow": "Portfolio",
+    "heroHeading": "Building practical solutions with measurable results.",
+    "heroSubheading": "A selection of professional work, case studies, and capabilities. Everything on this site is editable from the built-in editor.",
+    "ctaPrimaryLabel": "View work",
+    "ctaPrimaryUrl": "projects.html",
+    "ctaSecondaryLabel": "Get in touch",
+    "ctaSecondaryUrl": "contact.html",
+    "stats": [
+      { "value": "5+", "label": "Years of experience" },
+      { "value": "20", "label": "Projects delivered" },
+      { "value": "12", "label": "Clients served" },
+      { "value": "100%", "label": "On-time delivery" }
+    ],
+    "servicesEyebrow": "Capabilities",
+    "servicesHeading": "What I do",
+    "servicesIntro": "Core areas of focus and the kind of engagements I take on.",
+    "services": [
+      {
+        "title": "Discovery & Strategy",
+        "description": "Clarify the problem, map constraints, and define a scope that can actually ship. Deliverables include requirements, success metrics, and a phased plan."
+      },
+      {
+        "title": "Design & Implementation",
+        "description": "Turn the plan into working output. Structured delivery with clear checkpoints, documented decisions, and no surprises at handoff."
+      },
+      {
+        "title": "Review & Optimization",
+        "description": "Audit what exists, identify what is underperforming, and prioritize fixes by impact against effort. Findings delivered as an actionable report."
+      }
+    ]
+  },
+  "projects": [
+    {
+      "id": "sample-project",
+      "title": "Sample Project",
+      "summary": "A short one-line description of the project and the outcome it produced.",
+      "client": "Client or Company Name",
+      "role": "Your role on the project",
+      "year": "2025",
+      "status": "Completed",
+      "featured": true,
+      "tags": ["Strategy", "Implementation"],
+      "cover": "",
+      "gallery": [],
+      "highlights": [
+        "Reduced processing time by 40 percent",
+        "Delivered two weeks ahead of schedule",
+        "Adopted by three internal teams"
+      ],
+      "description": "## Overview\n\nReplace this content in the editor. Describe the context, the problem, and why the work mattered.\n\n## Approach\n\nExplain what you did and the decisions you made. Basic formatting is supported:\n\n- Bullet points\n- **Bold text** and *italic text*\n- [Links](https://example.com)\n\n## Outcome\n\nClose with the result. Quantify it wherever possible.",
+      "links": [
+        { "label": "View live site", "url": "https://example.com" }
+      ]
+    },
+    {
+      "id": "second-sample",
+      "title": "Second Sample Project",
+      "summary": "Another placeholder entry so you can see how the grid and filters behave with multiple items.",
+      "client": "Internal",
+      "role": "Lead",
+      "year": "2024",
+      "status": "Completed",
+      "featured": true,
+      "tags": ["Research", "Reporting"],
+      "cover": "",
+      "gallery": [],
+      "highlights": [],
+      "description": "Add your case study here using the editor.",
+      "links": []
+    }
+  ],
+  "experience": [
+    {
+      "role": "Your Job Title",
+      "organization": "Company Name",
+      "location": "City, State",
+      "start": "2023",
+      "end": "",
+      "current": true,
+      "summary": "One sentence on the scope of the role.",
+      "bullets": [
+        "Describe a responsibility and the result it produced",
+        "Lead with the outcome, then the action",
+        "Use numbers wherever you have them"
+      ]
+    },
+    {
+      "role": "Previous Job Title",
+      "organization": "Previous Company",
+      "location": "City, State",
+      "start": "2021",
+      "end": "2023",
+      "current": false,
+      "summary": "",
+      "bullets": [
+        "A prior accomplishment worth highlighting"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "credential": "Degree or Program",
+      "institution": "Institution Name",
+      "location": "City, State",
+      "year": "2021",
+      "detail": "Honors, concentration, or relevant coursework."
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Certification Name",
+      "issuer": "Issuing Organization",
+      "year": "2024",
+      "url": ""
+    }
+  ],
+  "skills": [
+    {
+      "category": "Core",
+      "items": ["Project Management", "Stakeholder Communication", "Process Design"]
+    },
+    {
+      "category": "Technical",
+      "items": ["Excel", "SQL", "Data Analysis", "Reporting"]
+    },
+    {
+      "category": "Tools",
+      "items": ["Jira", "Notion", "Power BI"]
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "Replace this with a real quote from a manager, client, or colleague. Short, specific praise is far more convincing than long general praise.",
+      "author": "Name of Referrer",
+      "title": "Title, Company"
+    }
+  ],
+  "about": {
+    "eyebrow": "About",
+    "heading": "Background",
+    "body": "Write a fuller professional narrative here. Two to four paragraphs works well.\n\nCover how you got into this field, what you focus on now, and what kind of work you are looking for next. Basic formatting such as **bold**, *italic*, bullet lists, and [links](https://example.com) is supported."
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "heading": "Get in touch",
+    "body": "Tell me about the role or project you have in mind and I will get back to you within two business days.",
+    "formEndpoint": "",
+    "formNote": "Add a Formspree or Getform endpoint in the editor to enable this form. Until then, the form falls back to opening your email client."
+  }
+}
